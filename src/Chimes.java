@@ -1,5 +1,6 @@
-/**
- * Created by Derek on 6/3/2016.
- */
+
 public class Chimes {
+    public static void main(){
+        System.out.println("Hello World");
+    }
 }
