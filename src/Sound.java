@@ -21,5 +21,7 @@ public class Sound {
         }).start();
     }
 }
-// Comment by Mr. Anderson
-// Comment by Eli Go test
+/*
+Comment by Mr. Anderson
+Comment by Eli Go test
+*/
