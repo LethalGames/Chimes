@@ -26,6 +26,7 @@ class Calendar {
                 currentLine = currentLine.substring(17);
                 if (currentLine.equals(yearMonthDay)) {
                     while (!currentLine.startsWith("DTSTART;VALUE=DATE:")) {
+                        currentLine = scan.nextLine();
                         if(currentLine.startsWith("Summary")){
                             return currentLine.substring(9);
                         }
