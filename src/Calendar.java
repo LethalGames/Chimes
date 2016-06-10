@@ -4,17 +4,21 @@
 import java.util.Scanner;
 import java.net.URL;
 import java.io.IOException;
-public class Calendar {
-    try {
-
-        URL url = new URL("https://googledrive.com/host/0B3JNWZriD7u5VTEyTXdlMU9tZzQ/rotation-calendar.ics");
-        Scanner scan = new Scanner(url.openStream());
-        while(scan.hasNext()){
-            scan.nextLine();
-        }
-
-    } catch (IOException ex){
-        ex.printStackTrace();
+class Calendar {
+    private int numLines;
+    Calendar(){
+        createScanner("https://googledrive.com/host/0B3JNWZriD7u5VTEyTXdlMU9tZzQ/rotation-calendar.ics");
     }
+    private void createScanner(String url) {
+        try {
+            Scanner scan = new Scanner(new URL(url).openStream());
+            while (scan.hasNext()) {
+                scan.nextLine();
+                ++numLines;
+            }
 
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
