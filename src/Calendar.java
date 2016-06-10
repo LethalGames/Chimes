@@ -8,14 +8,10 @@ class Calendar {
         createScanner("https://calendar.google.com/calendar/ical/nps.org_7iedrkgs2rbf6prfqr9r1m5ov4%40group.calendar.google.com/public/basic.ics");
     }
     private void createScanner(String url) {
-        int num = 20;
         try {
             scan = new Scanner(new URL(url).openStream());
             while (scan.hasNext()) {
-                if(numLines == num) {
-                    scan.nextLine();    //Only scans the "SUMMARY" line//
-                    num += 14;
-                }
+                    scan.nextLine();
                 ++numLines;
             }
 
