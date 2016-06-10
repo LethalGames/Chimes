@@ -14,12 +14,9 @@ public class Time {
         LocalTime time = LocalTime.now();
         return (time.getSecond()/100) + (double)(time.getMinute());
     }
-    public int getMonth(){
+    public String getDate(){
         LocalDate date = LocalDate.now();
-        return date.getMonthValue();
-    }
-    public int getDay(){
-        LocalDate date = LocalDate.now();
-        return date.getDayOfMonth();
+        String str = "" + date.getYear() + date.getMonthValue() + date.getDayOfMonth();
+        return str;
     }
 }
