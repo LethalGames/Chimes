@@ -14,7 +14,7 @@ class Calendar {
                     scan.nextLine();
                 ++numLines;
             }
-
+            scan = new Scanner(new URL(url).openStream());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -27,8 +27,8 @@ class Calendar {
                 if (currentLine.equals(yearMonthDay)) {
                     while (!currentLine.startsWith("DTSTART;VALUE=DATE:")) {
                         currentLine = scan.nextLine();
-                        if(currentLine.startsWith("Summary")){
-                            return currentLine.substring(9);
+                        if(currentLine.startsWith("SUMMARY:")){
+                            return currentLine.substring(8);
                         }
                     }
                     System.out.println("Summary not found");
