@@ -14,7 +14,7 @@ class Calendar {
                     scan.nextLine();
                 ++numLines;
             }
-
+            scan = new Scanner(new URL(url).openStream());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -22,6 +22,7 @@ class Calendar {
     public String getTodaysScedual(String yearMonthDay){
         while(scan.hasNext()) {
             String currentLine = scan.nextLine();
+            System.out.println(currentLine);
             if (currentLine.startsWith("DTEND;VALUE=DATE:")) {
                 currentLine = currentLine.substring(17);
                 if (currentLine.equals(yearMonthDay)) {
