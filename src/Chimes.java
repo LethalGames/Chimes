@@ -8,6 +8,6 @@ public class Chimes {
     boolean isAlt;
     public static void main(String[] args) {
         Calendar calendar = new Calendar();
-        System.out.println(calendar.getTodaysScedual(2016 + "" + 10 + "" + 2016));
+        System.out.println(calendar.getTodaysScedual(2016 * 10000 + 6 * 100 + 10 + ""));
     }
 }

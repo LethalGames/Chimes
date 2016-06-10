@@ -22,14 +22,13 @@ class Calendar {
     public String getTodaysScedual(String yearMonthDay){
         while(scan.hasNext()) {
             String currentLine = scan.nextLine();
-            System.out.println(currentLine);
             if (currentLine.startsWith("DTEND;VALUE=DATE:")) {
                 currentLine = currentLine.substring(17);
                 if (currentLine.equals(yearMonthDay)) {
                     while (!currentLine.startsWith("DTSTART;VALUE=DATE:")) {
                         currentLine = scan.nextLine();
-                        if(currentLine.startsWith("Summary")){
-                            return currentLine.substring(9);
+                        if(currentLine.startsWith("SUMMARY:")){
+                            return currentLine.substring(8);
                         }
                     }
                     System.out.println("Summary not found");
