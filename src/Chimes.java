@@ -6,8 +6,7 @@ public class Chimes {
     double[] altStartTimes = new double[]{7.25, 8.30, 9.24, 10.04, 10.58, 12.54};
     double[] altEndTimes = new double[]{8.15, 9.20, 10.00, 10.54, 12.50, 1.55};
     boolean isAlt;
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Calendar calendar = new Calendar();
-        //Ilona Comment
     }
 }
