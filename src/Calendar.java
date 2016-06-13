@@ -22,8 +22,8 @@ class Calendar {
     public String getTodaysScedual(String yearMonthDay){
         while(scan.hasNext()) {
             String currentLine = scan.nextLine();
-            if (currentLine.startsWith("DTEND;VALUE=DATE:")) {
-                currentLine = currentLine.substring(17);
+            if (currentLine.startsWith("DTSTART;VALUE=DATE:")) {
+                currentLine = currentLine.substring(19);
                 if (currentLine.equals(yearMonthDay)) {
                     while (!currentLine.startsWith("DTSTART;VALUE=DATE:")) {
                         currentLine = scan.nextLine();
