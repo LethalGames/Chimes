@@ -10,13 +10,13 @@ import java.time.ZoneOffset;
 
 
 public class Time {
-    public double getTime(){
+    public static double getTime(){
         LocalTime time = LocalTime.now();
-        return (time.getSecond()/100) + (double)(time.getMinute());
+        return ((double)time.getSecond()/10000) + ((double)time.getMinute()/100) + time.getHour();
     }
-    public String getDate(){
+    public static String getDate(){
         LocalDate date = LocalDate.now();
-        String str = "" + date.getYear() + date.getMonthValue() + date.getDayOfMonth();
+        String str = "" + (date.getYear()*10000 + date.getMonthValue()*100 + date.getDayOfMonth());
         return str;
     }
 }
