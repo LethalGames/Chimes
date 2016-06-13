@@ -33,12 +33,26 @@ public class GUI extends Application {
         btn1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Text t1 = new Text(10,50,"I'm Working");
+                Text t1 = new Text(500,50,"I'm Working");
 
                 root.getChildren().add(t1);
             }
         });
         root.getChildren().add(btn1);
+
+        Calendar cal = new Calendar();
+        Button sched = new Button();
+        sched.setText("Today's Schedule");
+        sched.relocate(0,25);
+        sched.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event){
+                Text tSched = new Text(500,50,cal.getTodaysScedual(Time.getDate())); //Date not found
+
+                root.getChildren().add(tSched);
+            }
+        });
+        root.getChildren().add(sched);
 
 
         primaryStage.setScene(scene);

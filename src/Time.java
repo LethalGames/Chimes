@@ -16,7 +16,7 @@ public class Time {
     }
     public static String getDate(){
         LocalDate date = LocalDate.now();
-        String str = "" + (date.getYear()*10000 + date.getMonthValue()*100 + date.getDayOfMonth());
+        String str = "" + (date.getYear() + date.getMonthValue() + date.getDayOfMonth());
         return str;
     }
 }
