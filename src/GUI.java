@@ -24,6 +24,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 
+import static java.lang.Integer.parseInt;
+
 public class GUI extends Application {
 
     public static void main(String[] args) {
@@ -68,12 +70,16 @@ public class GUI extends Application {
         grid.add(submit, 3, 2);
         Label label = new Label();
         grid.add(label, 0, 3);
+        Chimes chime = new Chimes();
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 if ((blockField.getText() != null && !blockField.getText().isEmpty() && timeField.getText() != null
                             && !timeField.getText().isEmpty())) {
                     label.setText("All set! :)");
+                    int period = parseInt(blockField.getText());
+                    int timeEnd = parseInt(timeField.getText());
+                    chime.addAlarm(period, timeEnd);
                 } else {
                     label.setText("It's empty! :(");
                 }
