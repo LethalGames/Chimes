@@ -57,4 +57,7 @@ public class Chimes {
         }
         return alarms;
     }
+    public void addAlarm(int period, int timeFromEnd){
+        alarmTimes[period].get(timeFromEnd);
+    }
 }
