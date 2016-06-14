@@ -24,7 +24,7 @@ public class Chimes {
 
 
         //Random Times
-        alarmTimes[4].add(32);//0 == period 1 && 6 == period 7
+        alarmTimes[4].add(32);// 0 == period 1 && 6 == period 7
 
         while(true) {
             Thread.sleep(100);
