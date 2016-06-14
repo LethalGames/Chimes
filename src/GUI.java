@@ -15,6 +15,14 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 
 public class GUI extends Application {
 
@@ -25,36 +33,38 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         Group root = new Group();
-        Scene scene = new Scene(root, 1000, 800);
-        scene.setFill(Color.LIGHTGRAY);
 
-        Button btn1 = new Button();
-        btn1.setText("Test");
-        btn1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Text t1 = new Text(500,50,"I'm Working");
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
 
-                root.getChildren().add(t1);
-            }
-        });
-        root.getChildren().add(btn1);
+        Label userName = new Label("Block:");
+        grid.add(userName, 0, 1);
+
+        TextField userTextField = new TextField();
+        grid.add(userTextField, 1, 1);
+
+        Label pw = new Label("Time Before End:");
+        grid.add(pw, 0, 2);
+
+        PasswordField pwBox = new PasswordField();
+        grid.add(pwBox, 1, 2);
 
         Calendar cal = new Calendar();
         Button sched = new Button();
         sched.setText("Today's Schedule");
-        sched.relocate(0,25);
+        grid.add(sched, 2, 2);
         sched.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
                 Text tSched = new Text(500,50,cal.getTodaysScedual(Time.getDate())); //Date not found
 
-                root.getChildren().add(tSched);
+                grid.add(tSched, 2, 3);
             }
         });
-        root.getChildren().add(sched);
 
-
+        Scene scene = new Scene(grid);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
