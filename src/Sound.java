@@ -9,7 +9,7 @@ public class Sound {
             try
             {
                 Clip c = AudioSystem.getClip();
-                File sound = new File("P:\\" + input);
+                File sound = new File("c:\\" + input);
                 AudioInputStream ain = AudioSystem.getAudioInputStream(sound);
                 c.open(ain);
                 c.start();
