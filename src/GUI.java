@@ -69,19 +69,24 @@ public class GUI extends Application {
         Button submit = new Button("Submit");
         grid.add(submit, 3, 2);
         Label label = new Label();
-        grid.add(label, 0, 3);
+        grid.add(label, 3, 3);
         Chimes chime = new Chimes();
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 if ((blockField.getText() != null && !blockField.getText().isEmpty() && timeField.getText() != null
                             && !timeField.getText().isEmpty())) {
-                    label.setText("All set! :)");
                     int period = parseInt(blockField.getText());
                     int timeEnd = parseInt(timeField.getText());
-                    chime.addAlarm(period, timeEnd);
+                    if(period > 0 && period < 8 && timeEnd > -1 && timeEnd < 54) {
+                        label.setText("All set!");
+                        chime.addAlarm(period, timeEnd);
+                    }
+                    else{
+                        label.setText("Bad num!");
+                    }
                 } else {
-                    label.setText("It's empty! :(");
+                    label.setText("It's empty!");
                 }
             }
         });
