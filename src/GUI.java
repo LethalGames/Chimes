@@ -39,17 +39,17 @@ public class GUI extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Label userName = new Label("Block:");
-        grid.add(userName, 0, 1);
+        Label block = new Label("Block:");
+        grid.add(block, 0, 1);
 
-        TextField userTextField = new TextField();
-        grid.add(userTextField, 1, 1);
+        TextField blockField = new TextField();
+        grid.add(blockField, 1, 1);
 
-        Label pw = new Label("Time Before End:");
-        grid.add(pw, 0, 2);
+        Label time = new Label("Time Before End:");
+        grid.add(time, 0, 2);
 
-        PasswordField pwBox = new PasswordField();
-        grid.add(pwBox, 1, 2);
+        TextField timeField = new TextField();
+        grid.add(timeField, 1, 2);
 
         Calendar cal = new Calendar();
         Button sched = new Button();
@@ -61,6 +61,22 @@ public class GUI extends Application {
                 Text tSched = new Text(500,50,cal.getTodaysScedual(Time.getDate())); //Date not found
 
                 grid.add(tSched, 2, 3);
+            }
+        });
+
+        Button submit = new Button("Submit");
+        grid.add(submit, 3, 2);
+        Label label = new Label();
+        grid.add(label, 0, 3);
+        submit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                if ((blockField.getText() != null && !blockField.getText().isEmpty() && timeField.getText() != null
+                            && !timeField.getText().isEmpty())) {
+                    label.setText("All set! :)");
+                } else {
+                    label.setText("It's empty! :(");
+                }
             }
         });
 
