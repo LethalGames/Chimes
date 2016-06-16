@@ -81,7 +81,7 @@ public class GUI extends Application {
                     int timeEnd = parseInt(timeField.getText());
                     if(period > 0 && period < 8 && timeEnd > -1 && timeEnd < 54) {
                         label.setText("All set!");
-                        chime.addAlarm(period, timeEnd);
+                        chime.addAlarm(period-1, timeEnd);//period is from 0-6
                     }
                     else{
                         label.setText("Bad num!");

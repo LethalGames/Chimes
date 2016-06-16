@@ -10,7 +10,7 @@ class Chimes {
     Chimes() {
         Calendar calendar = new Calendar();
         System.out.println(Time.getDate());
-        String summary = calendar.getTodaysScedual("20160607");
+        String summary = calendar.getTodaysScedual(Time.getDate());
         System.out.println(summary);
         if(summary.contains("alt")){
             isAlt = true;
