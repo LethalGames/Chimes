@@ -1,34 +1,34 @@
 import java.util.ArrayList;
 
-public class Chimes {
+class Chimes {
     private int[][] days = new int[][]{new int[]{0, 1, 2, 3, 4}, new int[]{5, 6, 0, 1, 2}, new int[]{3, 4, 5, 6, 0}, new int[]{1, 2, 3, 4, 5}, new int[]{6, 0, 1, 2, 3}, new int[]{4, 5, 6, 0, 1}, new int[]{2, 3, 4, 5, 6}};
     private double[] startTimes = new double[]{7.25, 8.40, 9.49, 10.58, 12.54}, endTimes = new double[]{8.30, 9.45, 10.54, 12.50, 13.55}, altStartTimes = new double[]{7.25, 8.30, 9.24, 10.04, 10.58, 12.54}, altEndTimes = new double[]{8.15, 9.20, 10.00, 10.54, 12.50, 13.55};
     private boolean isAlt;
     private int currentDay;
-    private String summary;
     private ArrayList<Integer>[] alarmTimes = new ArrayList[7];
-    public void Chimes() {
+    Chimes() {
         Calendar calendar = new Calendar();
         System.out.println(Time.getDate());
-        summary = calendar.getTodaysScedual(Time.getDate() + "");
+        String summary = calendar.getTodaysScedual("20160607");
         System.out.println(summary);
         if(summary.contains("alt")){
             isAlt = true;
         }
-        currentDay = (int)summary.toCharArray()[0] - 65;
+        currentDay = (int) summary.toCharArray()[0] - 65;
         System.out.println(currentDay);//so you can use days[currentDay][<block>] to get the schedule for the day
         System.out.println(Time.getTime() + " ; " + Time.getDate());
         for(int i = 0; i < alarmTimes.length; i++){
             alarmTimes[i] = new ArrayList<>();
         }
     }
-    public void putThisInPaintLoopOnceThereIsAGUI(){
-        for(int i = 0; i < getAlarmTimes(getCurrentPeriod(), getCurrentBlock()).length; i++){
-            System.out.println(((double)(int)((Time.getTime())*100))/100 + " : " + ((double)(int)((getAlarmTimes(getCurrentPeriod(), getCurrentBlock())[i])*100))/100);
-            if(((double)(int)((Time.getTime())*100))/100 == ((double)(int)((getAlarmTimes(getCurrentPeriod(), getCurrentBlock())[i])*100))/100) {
-                Sound.playSound("chime.wav");
+    void putThisInPaintLoopOnceThereIsAGUI(){
+        if(!alarmTimes[getCurrentPeriod()].isEmpty())
+            for(int i = 0; i < getAlarmTimes(getCurrentPeriod(), getCurrentBlock()).length; i++){
+                System.out.println(((double)(int)((Time.getTime())*100))/100 + " : " + ((double)(int)((getAlarmTimes(getCurrentPeriod(), getCurrentBlock())[i])*100))/100);
+                if(((double)(int)((Time.getTime())*100))/100 == ((double)(int)((getAlarmTimes(getCurrentPeriod(), getCurrentBlock())[i])*100))/100) {
+                    Sound.playSound("chime.wav");
+                }
             }
-        }
     }
     private int getCurrentBlock(){
         for(int i = 0; i < startTimes.length; i++){
@@ -57,7 +57,24 @@ public class Chimes {
         }
         return alarms;
     }
-    public void addAlarm(int period, int timeFromEnd){
+    void addAlarm(int period, int timeFromEnd){
         alarmTimes[period].get(timeFromEnd);
     }
 }
+class ChimeLoop extends Thread{
+    private Chimes c;
+    ChimeLoop(Chimes c){
+        this.c = c;
+    }
+    public void run(){
+        while(true) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            c.putThisInPaintLoopOnceThereIsAGUI();
+        }
+    }
+}
+

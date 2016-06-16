@@ -71,6 +71,9 @@ public class GUI extends Application {
         Label label = new Label();
         grid.add(label, 3, 3);
         Chimes chime = new Chimes();
+        System.out.println("test");
+        new ChimeLoop(chime).start();
+        System.out.println("test");
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
