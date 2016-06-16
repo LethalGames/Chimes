@@ -96,4 +96,7 @@ public class GUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    public void stop(){//Things to do on program close
+        Chimes.stop();
+    }
 }

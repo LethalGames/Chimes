@@ -5,7 +5,8 @@ class Chimes {
     private double[] startTimes = new double[]{7.25, 8.40, 9.49, 10.58, 12.54}, endTimes = new double[]{8.30, 9.45, 10.54, 12.50, 13.55}, altStartTimes = new double[]{7.25, 8.30, 9.24, 10.04, 10.58, 12.54}, altEndTimes = new double[]{8.15, 9.20, 10.00, 10.54, 12.50, 13.55};
     private boolean isAlt;
     private int currentDay;
-    private ArrayList<Integer>[] alarmTimes = new ArrayList[7];
+    private ArrayList[] alarmTimes = new ArrayList[7];
+    static boolean run = true;
     Chimes() {
         Calendar calendar = new Calendar();
         System.out.println(Time.getDate());
@@ -18,7 +19,7 @@ class Chimes {
         System.out.println(currentDay);//so you can use days[currentDay][<block>] to get the schedule for the day
         System.out.println(Time.getTime() + " ; " + Time.getDate());
         for(int i = 0; i < alarmTimes.length; i++){
-            alarmTimes[i] = new ArrayList<>();
+            alarmTimes[i] = new ArrayList<Integer>();
         }
     }
     void putThisInPaintLoopOnceThereIsAGUI(){
@@ -57,6 +58,8 @@ class Chimes {
         }
         return alarms;
     }
+    static void stop(){run = false;}
+    boolean isRunning(){return run;}
     void addAlarm(int period, int timeFromEnd){
         alarmTimes[period].get(timeFromEnd);
     }
@@ -67,7 +70,7 @@ class ChimeLoop extends Thread{
         this.c = c;
     }
     public void run(){
-        while(true) {
+        while(c.isRunning()) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
