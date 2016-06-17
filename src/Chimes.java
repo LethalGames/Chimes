@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 class Chimes {
     private int[][] days = new int[][]{new int[]{0, 1, 2, 3, 4}, new int[]{5, 6, 0, 1, 2}, new int[]{3, 4, 5, 6, 0}, new int[]{1, 2, 3, 4, 5}, new int[]{6, 0, 1, 2, 3}, new int[]{4, 5, 6, 0, 1}, new int[]{2, 3, 4, 5, 6}};
-    private double[] startTimes = new double[]{7.25, 8.40, 9.49, 10.58, 12.54}, endTimes = new double[]{8.30, 9.45, 10.54, 12.50, 13.55}, altStartTimes = new double[]{7.25, 8.30, 9.24, 10.04, 10.58, 12.54}, altEndTimes = new double[]{8.15, 9.20, 10.00, 10.54, 12.50, 13.55};
+    private double[] startTimes = new double[]{7.25, 8.40, 9.49, 10.58, 12.54}, endTimes = new double[]{8.30, 9.45, 10.54, 12.50, 13.55}, altStartTimes = new double[]{7.25, 8.30, 10.04, 10.58, 12.54}, altEndTimes = new double[]{8.15, 9.20, 10.54, 12.50, 13.55};
     private boolean isAlt;
     private int currentDay;
     private ArrayList[] alarmTimes = new ArrayList[7];
@@ -28,7 +28,6 @@ class Chimes {
             for(int i = 0; i < getAlarmTimes(getCurrentPeriod(), getCurrentBlock()).length; i++){
                 if(playable != 0 && playable < (int)(Time.getTime()*100))
                     playable = 0;
-                System.out.println(((double)(int)((Time.getTime())*100))/100 + " : " + ((double)(int)((getAlarmTimes(getCurrentPeriod(), getCurrentBlock())[i])*100))/100);
                 if(((double)(int)((Time.getTime())*100))/100 == ((double)(int)((getAlarmTimes(getCurrentPeriod(), getCurrentBlock())[i])*100))/100) {
                     if(playable == 0) {
                         Sound.playSound("chime.wav");
@@ -38,26 +37,46 @@ class Chimes {
             }
     }
     private int getCurrentBlock(){
-        for(int i = 0; i < startTimes.length; i++){
-            if(Time.getTime() > startTimes[i] && Time.getTime() < endTimes[i]){
-                return i;
+        if(isAlt) {
+            for (int i = 0; i < altStartTimes.length; i++) {
+                if (Time.getTime() > altStartTimes[i] && Time.getTime() < altEndTimes[i]) {
+                    return i;
+                }
             }
         }
+        else
+            for(int i = 0; i < startTimes.length; i++){
+                if(Time.getTime() > startTimes[i] && Time.getTime() < endTimes[i]){
+                    return i;
+                }
+            }
         return -1;
     }
     private int getCurrentPeriod(){
-        for(int i = 0; i < startTimes.length; i++){
-            if(Time.getTime() > startTimes[i] && Time.getTime() < endTimes[i]){
-                return days[currentDay][i];
+        if(isAlt) {
+            for (int i = 0; i < altStartTimes.length; i++) {
+                if (Time.getTime() > altStartTimes[i] && Time.getTime() < altEndTimes[i]) {
+                    return days[currentDay][i];
+                }
             }
         }
+        else
+            for (int i = 0; i < startTimes.length; i++) {
+                if (Time.getTime() > startTimes[i] && Time.getTime() < endTimes[i]) {
+                    return days[currentDay][i];
+                }
+            }
         System.out.println("No period found");
         return -1;
     }
     private double[] getAlarmTimes(int period, int block){
         double[] alarms = new double[alarmTimes[period].size()];
         for(int i = 0; i < alarms.length; i++){
-            alarms[i] = endTimes[block] - Double.parseDouble(alarmTimes[period].get(i) + "")/100;
+            if(isAlt) {
+                alarms[i] = altEndTimes[block] - Double.parseDouble(alarmTimes[period].get(i) + "") / 100;
+            }
+            else
+                alarms[i] = endTimes[block] - Double.parseDouble(alarmTimes[period].get(i) + "") / 100;
             while(alarms[i] % 1 > .59){
                 alarms[i] += .4;
             }
