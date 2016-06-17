@@ -73,21 +73,19 @@ public class GUI extends Application {
         Chimes chime = new Chimes();
         new ChimeLoop(chime).start();
         submit.setOnAction(new EventHandler<ActionEvent>() {
+            int y = 4;
             @Override
             public void handle(ActionEvent e) {
                 if ((blockField.getText() != null && !blockField.getText().isEmpty() && timeField.getText() != null
                             && !timeField.getText().isEmpty())) {
+                    y++;
                     int period = parseInt(blockField.getText());
                     int timeEnd = parseInt(timeField.getText());
                     if(period > 0 && period < 8 && timeEnd > -1 && timeEnd < 65) {
                         label.setText("All set!");
                         chime.addAlarm(period-1, timeEnd);//period is from 0-6
-                        String helpMe = "";
-                        for(int i = 0; i < chime.getAlarmTimes(chime.getCurrentPeriod(), chime.getCurrentBlock()).length; i++){
-                            helpMe += chime.getAlarmTimes(chime.getCurrentPeriod(), chime.getCurrentBlock())[i] + " | ";
-                        }
-                        Text confirm = new Text("Period " + period + ": " + helpMe);
-                        grid.add(confirm, 0, 4);
+                        Text confirm = new Text("Alarm added to Period " + period + " for " + timeEnd + " min before end");
+                        grid.add(confirm, 0, y);
                     }
                     else{
                         label.setText("Bad num!");
@@ -98,10 +96,26 @@ public class GUI extends Application {
             }
         });
 
-        Scene scene = new Scene(grid);
+       /* Button update = new Button("Update Alarms");
+        grid.add(update, 3, 3);
+        int count = 0;
+        update.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                String helpMe = "";
+                for(int i = 0; i < chime.getAlarmTimes(chime.getCurrentPeriod(), chime.getCurrentBlock()).length; i++){
+                    helpMe += chime.getAlarmTimes(chime.getCurrentPeriod(), chime.getCurrentBlock())[i] + " | ";
+                }
+                Text confirm = new Text("Period " + chime.getCurrentPeriod() + ": " + helpMe);
+                grid.add(confirm, 0, 4);
+            }
+        });*/
+
+        Scene scene = new Scene(grid, 700, 700);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
     public void stop(){//Things to do on program close
         Chimes.stop();
     }
