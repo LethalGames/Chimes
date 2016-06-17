@@ -81,7 +81,7 @@ public class GUI extends Application {
                     y++;
                     int period = parseInt(blockField.getText());
                     int timeEnd = parseInt(timeField.getText());
-                    if(period > 0 && period < 8 && timeEnd > -1 && timeEnd < 120) {
+                    if(period > 0 && period < 8 && timeEnd > -1 && timeEnd < 121) {
                         label.setText("All set!");
                         chime.addAlarm(period-1, timeEnd);//period is from 0-6
                         Text confirm = new Text("Alarm added to Period " + period + " for " + timeEnd + " min before end");
