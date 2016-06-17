@@ -36,7 +36,7 @@ class Chimes {
                 }
             }
     }
-    private int getCurrentBlock(){
+     int getCurrentBlock(){
         if(isAlt) {
             for (int i = 0; i < altStartTimes.length; i++) {
                 if (Time.getTime() > altStartTimes[i] && Time.getTime() < altEndTimes[i]) {
@@ -52,7 +52,7 @@ class Chimes {
             }
         return -1;
     }
-    private int getCurrentPeriod(){
+   int getCurrentPeriod(){
         if(isAlt) {
             for (int i = 0; i < altStartTimes.length; i++) {
                 if (Time.getTime() > altStartTimes[i] && Time.getTime() < altEndTimes[i]) {
@@ -69,7 +69,7 @@ class Chimes {
         System.out.println("No period found");
         return -1;
     }
-    private double[] getAlarmTimes(int period, int block){
+     double[] getAlarmTimes(int period, int block){
         double[] alarms = new double[alarmTimes[period].size()];
         for(int i = 0; i < alarms.length; i++){
             if(isAlt) {

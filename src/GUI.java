@@ -41,13 +41,13 @@ public class GUI extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Label block = new Label("Block:");
+        Text block = new Text("Block:");
         grid.add(block, 0, 1);
 
         TextField blockField = new TextField();
         grid.add(blockField, 1, 1);
 
-        Label time = new Label("Time Before End:");
+        Text time = new Text("Time Before End:");
         grid.add(time, 0, 2);
 
         TextField timeField = new TextField();
@@ -68,7 +68,7 @@ public class GUI extends Application {
 
         Button submit = new Button("Submit");
         grid.add(submit, 3, 2);
-        Label label = new Label();
+        Text label = new Text();
         grid.add(label, 3, 3);
         Chimes chime = new Chimes();
         new ChimeLoop(chime).start();
@@ -79,9 +79,15 @@ public class GUI extends Application {
                             && !timeField.getText().isEmpty())) {
                     int period = parseInt(blockField.getText());
                     int timeEnd = parseInt(timeField.getText());
-                    if(period > 0 && period < 8 && timeEnd > -1 && timeEnd < 54) {
+                    if(period > 0 && period < 8 && timeEnd > -1 && timeEnd < 65) {
                         label.setText("All set!");
                         chime.addAlarm(period-1, timeEnd);//period is from 0-6
+                        String helpMe = "";
+                        for(int i = 0; i < chime.getAlarmTimes(chime.getCurrentPeriod(), chime.getCurrentBlock()).length; i++){
+                            helpMe += chime.getAlarmTimes(chime.getCurrentPeriod(), chime.getCurrentBlock())[i] + " | ";
+                        }
+                        Text confirm = new Text("Period " + period + ": " + helpMe);
+                        grid.add(confirm, 0, 4);
                     }
                     else{
                         label.setText("Bad num!");
