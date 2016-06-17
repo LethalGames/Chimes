@@ -60,7 +60,7 @@ public class GUI extends Application {
         sched.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
-                Text tSched = new Text(500,50,cal.getTodaysScedual(Time.getDate())); //Date not found
+                Text tSched = new Text(500, 50, cal.getTodaysScedual(Time.getDate())); //Date not found
 
                 grid.add(tSched, 2, 3);
             }

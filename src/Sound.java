@@ -10,7 +10,7 @@ class Sound {
             {
                 Clip c = AudioSystem.getClip();
                 System.out.println("ding");
-                File sound = new File("c:\\" + input);
+                File sound = new File("C:\\Users\\PAnderson\\Google Drive\\Classes\\General\\Software\\Chimes\\Sounds\\" + input);
                 AudioInputStream ain = AudioSystem.getAudioInputStream(sound);
                 c.open(ain);
                 c.start();

@@ -19,7 +19,7 @@ class Calendar {
             ex.printStackTrace();
         }
     }
-    public String getTodaysScedual(String yearMonthDay){
+    String getTodaysScedual(String yearMonthDay){
         while(scan.hasNext()) {
             String currentLine = scan.nextLine();
             if (currentLine.startsWith("DTSTART;VALUE=DATE:")) {

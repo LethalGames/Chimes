@@ -6,7 +6,7 @@ class Chimes {
     private boolean isAlt;
     private int currentDay;
     private ArrayList[] alarmTimes = new ArrayList[7];
-    static boolean run = true;
+    private static boolean run = true;
     private int playable;
     Chimes() {
         Calendar calendar = new Calendar();
@@ -36,7 +36,7 @@ class Chimes {
                 }
             }
     }
-     int getCurrentBlock(){
+     private int getCurrentBlock(){
         if(isAlt) {
             for (int i = 0; i < altStartTimes.length; i++) {
                 if (Time.getTime() > altStartTimes[i] && Time.getTime() < altEndTimes[i]) {
@@ -52,7 +52,7 @@ class Chimes {
             }
         return -1;
     }
-   int getCurrentPeriod(){
+   private int getCurrentPeriod(){
         if(isAlt) {
             for (int i = 0; i < altStartTimes.length; i++) {
                 if (Time.getTime() > altStartTimes[i] && Time.getTime() < altEndTimes[i]) {
@@ -69,7 +69,7 @@ class Chimes {
         System.out.println("No period found");
         return -1;
     }
-     double[] getAlarmTimes(int period, int block){
+     private double[] getAlarmTimes(int period, int block){
         double[] alarms = new double[alarmTimes[period].size()];
         for(int i = 0; i < alarms.length; i++){
             if(isAlt) {
@@ -82,6 +82,22 @@ class Chimes {
             }
         }
         return alarms;
+    }
+    public String[] getAlarms(){
+        int counter = 0;
+        for(int i = 0; i < alarmTimes.length; i++){
+            for(int l = 0; l < alarmTimes[i].size(); l++){
+                ++counter;
+            }
+        }
+        String[] alarmStrings = new String[counter];
+        counter = 0;
+        for(int i = 0; i < alarmTimes.length; i++) {
+            for (int l = 0; l < alarmTimes[i].size(); l++) {
+                alarmStrings[counter] = "" + alarmTimes[i].get(l);
+            }
+        }
+        return alarmStrings;
     }
     static void stop(){run = false;}
     boolean isRunning(){return run;}
