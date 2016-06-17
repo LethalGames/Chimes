@@ -81,7 +81,7 @@ public class GUI extends Application {
                     y++;
                     int period = parseInt(blockField.getText());
                     int timeEnd = parseInt(timeField.getText());
-                    if(period > 0 && period < 8 && timeEnd > -1 && timeEnd < 65) {
+                    if(period > 0 && period < 8 && timeEnd > -1 && timeEnd < 120) {
                         label.setText("All set!");
                         chime.addAlarm(period-1, timeEnd);//period is from 0-6
                         Text confirm = new Text("Alarm added to Period " + period + " for " + timeEnd + " min before end");
@@ -95,21 +95,6 @@ public class GUI extends Application {
                 }
             }
         });
-
-       /* Button update = new Button("Update Alarms");
-        grid.add(update, 3, 3);
-        int count = 0;
-        update.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                String helpMe = "";
-                for(int i = 0; i < chime.getAlarmTimes(chime.getCurrentPeriod(), chime.getCurrentBlock()).length; i++){
-                    helpMe += chime.getAlarmTimes(chime.getCurrentPeriod(), chime.getCurrentBlock())[i] + " | ";
-                }
-                Text confirm = new Text("Period " + chime.getCurrentPeriod() + ": " + helpMe);
-                grid.add(confirm, 0, 4);
-            }
-        });*/
 
         Scene scene = new Scene(grid, 700, 700);
         primaryStage.setScene(scene);
