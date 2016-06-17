@@ -1,14 +1,15 @@
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
-public class Sound {
-    public static void playSound(final String input)
+class Sound {
+    static void playSound(final String input)
     {
         new Thread(() ->
         {
             try
             {
                 Clip c = AudioSystem.getClip();
+                System.out.println("ding");
                 File sound = new File("c:\\" + input);
                 AudioInputStream ain = AudioSystem.getAudioInputStream(sound);
                 c.open(ain);

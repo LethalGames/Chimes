@@ -7,6 +7,7 @@ class Chimes {
     private int currentDay;
     private ArrayList[] alarmTimes = new ArrayList[7];
     static boolean run = true;
+    private int playable;
     Chimes() {
         Calendar calendar = new Calendar();
         System.out.println(Time.getDate());
@@ -25,9 +26,14 @@ class Chimes {
     void putThisInPaintLoopOnceThereIsAGUI(){
         if(!alarmTimes[getCurrentPeriod()].isEmpty())
             for(int i = 0; i < getAlarmTimes(getCurrentPeriod(), getCurrentBlock()).length; i++){
+                if(playable != 0 && playable < (int)(Time.getTime()*100))
+                    playable = 0;
                 System.out.println(((double)(int)((Time.getTime())*100))/100 + " : " + ((double)(int)((getAlarmTimes(getCurrentPeriod(), getCurrentBlock())[i])*100))/100);
                 if(((double)(int)((Time.getTime())*100))/100 == ((double)(int)((getAlarmTimes(getCurrentPeriod(), getCurrentBlock())[i])*100))/100) {
-                    Sound.playSound("chime.wav");
+                    if(playable == 0) {
+                        Sound.playSound("chime.wav");
+                        playable = (int)(Time.getTime()*100);
+                    }
                 }
             }
     }
@@ -51,7 +57,7 @@ class Chimes {
     private double[] getAlarmTimes(int period, int block){
         double[] alarms = new double[alarmTimes[period].size()];
         for(int i = 0; i < alarms.length; i++){
-            alarms[i] = endTimes[block] - (double)alarmTimes[period].get(i)/100;
+            alarms[i] = endTimes[block] - Double.parseDouble(alarmTimes[period].get(i) + "")/100;
             while(alarms[i] % 1 > .59){
                 alarms[i] += .4;
             }
@@ -61,7 +67,12 @@ class Chimes {
     static void stop(){run = false;}
     boolean isRunning(){return run;}
     void addAlarm(int period, int timeFromEnd){
-        alarmTimes[period].get(timeFromEnd);
+        alarmTimes[period].add(timeFromEnd);
+        for(int i = 0; i < 7; i++){
+            System.out.println("-^-" + i + "-^-");
+            for(int l = 0; l < alarmTimes[i].size(); l++)
+                System.out.println(" - " + alarmTimes[i].get(l) + " - ");
+        }
     }
 }
 class ChimeLoop extends Thread{
