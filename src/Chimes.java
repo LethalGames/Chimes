@@ -22,6 +22,7 @@ class Chimes {
         for(int i = 0; i < alarmTimes.length; i++){
             alarmTimes[i] = new ArrayList<Integer>();
         }
+        alarmTimes[0].add(10);// adds an alarm 10 mins before the end of period 1
     }
     void putThisInPaintLoopOnceThereIsAGUI(){
         if(!alarmTimes[getCurrentPeriod()].isEmpty())
